@@ -1,14 +1,42 @@
+import axios from 'axios';
 import React, { useState } from 'react'
+
 
 export const Login = () => {
 
-    const [emailId, setEmailId] = useState('');
-    const [password, setPassword] = useState('');
+    const [emailId, setEmailId] = useState('kathiresan.it22@bitsathy.ac.in');
+    const [password, setPassword] = useState('kathirNikitha');
+    const [error, setError] = useState('');
 
-    
+    const validateInput = () => {
+        if (!emailId || !/\S+@\S+\.\S+/.test(emailId)) {
+            setError('Please enter a valid email address.');
+            return false;
+        }
+        if (!password) {
+            setError('Please enter the password');
+            return false;
+        }
+        setError('');
+        return true;
+    };
+
+    const handleLogin = async(e) => {
+        e.preventDefault();
+        if( !validateInput()) return;
+
+        try {
+            const user = await axios.post('http://localhost:1313/auth/login', {emailId, password}, {withCredentials: true});
+            console.log(user.data);
+
+        } catch (error) {
+            console.error('Login failed:', error);
+            setError(error.message);
+        }
+    } 
 
   return (
-    <form data-theme="cupcake">
+    <form data-theme="cupcake" onSubmit={handleLogin}>
         <section className='flex justify-center items-center h-screen'>
             <div className="card bg-base-100 w-96 shadow-sm">
                 <div className="card-body items-center text-center">
@@ -27,6 +55,8 @@ export const Login = () => {
                         className="input input-neutral" 
                         onChange={(e) => (setPassword(e.target.value))}
                         />
+
+                        {error && <p className="text-red-500">{error}</p>}      
         
                     <div className="card-actions">
                         <button type="submit" className="btn btn-primary">Login</button>
