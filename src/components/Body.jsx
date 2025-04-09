@@ -5,10 +5,10 @@ import { Outlet } from 'react-router-dom'
 export const Body = () => {
   return (
     <>
-    <header data-theme="cupcake">
+    <header data-theme="aqua">
         < NavBar/>
     </header>
-    <main>
+    <main data-theme="abyss">
         <Outlet />
     </main>
     </>

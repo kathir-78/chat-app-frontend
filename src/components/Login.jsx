@@ -1,5 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlicer';
+import { useNavigate } from 'react-router-dom';
 
 
 export const Login = () => {
@@ -7,6 +10,8 @@ export const Login = () => {
     const [emailId, setEmailId] = useState('kathiresan.it22@bitsathy.ac.in');
     const [password, setPassword] = useState('kathirNikitha');
     const [error, setError] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const validateInput = () => {
         if (!emailId || !/\S+@\S+\.\S+/.test(emailId)) {
@@ -27,7 +32,9 @@ export const Login = () => {
 
         try {
             const user = await axios.post('http://localhost:1313/auth/login', {emailId, password}, {withCredentials: true});
-            console.log(user.data);
+            // console.log(user.data);
+            dispatch(addUser(user.data));
+            navigate("/");
 
         } catch (error) {
             console.error('Login failed:', error);
