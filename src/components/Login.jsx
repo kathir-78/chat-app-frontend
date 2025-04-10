@@ -31,7 +31,7 @@ export const Login = () => {
         if( !validateInput()) return;
 
         try {
-            const user = await axios.post('http://localhost:1313/auth/login', {emailId, password}, {withCredentials: true});
+            const user = await axios.post('import.meta.env.VITE_API_URL/auth/login', {emailId, password}, {withCredentials: true});
             // console.log(user.data);
             dispatch(addUser(user.data));
             navigate("/");
