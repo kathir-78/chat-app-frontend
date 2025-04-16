@@ -33,7 +33,7 @@ export const Body = () => {
 
   useEffect(()=> {
     fetchUserData();
-  },[])
+  }, [])
 
   return (
     <>

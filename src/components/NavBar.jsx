@@ -45,9 +45,14 @@ export const NavBar = () => {
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                     <li>
                         <Link to="/profile">
-                                Profile
+                            Profile
                         </Link>
                         {/* <span className="badge">New</span> */}
+                    </li>
+                    <li>
+                        <Link to="/">
+                            Peoples
+                        </Link>
                     </li>
                     {/* <li><a>Settings</a></li> */}
                     <li><a onClick={logoutUser}>Logout</a></li>

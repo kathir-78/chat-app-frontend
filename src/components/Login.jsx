@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlicer';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 export const Login = () => {
@@ -68,6 +68,16 @@ export const Login = () => {
                     <div className="card-actions">
                         <button type="submit" className="btn btn-primary">Login</button>
                     </div>
+
+                    <div>
+                        <span>
+                            If you are a new user,{' '}
+                            <Link to="/signup" className="text-blue-500 hover:underline">
+                            click here to sign up
+                            </Link>
+                        </span>
+                    </div>
+                    
                 </div>
             </div>
         </section>
