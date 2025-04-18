@@ -7,8 +7,8 @@ import { useNavigate, Link } from 'react-router-dom';
 
 export const Login = () => {
 
-    const [emailId, setEmailId] = useState('kathiresan.it22@bitsathy.ac.in');
-    const [password, setPassword] = useState('kathirNikitha');
+    const [emailId, setEmailId] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ export const Login = () => {
 
         } catch (error) {
             console.error('Login failed:', error);
-            setError(error.message);
+            setError(error.response.data.message);
         }
     } 
 
