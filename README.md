@@ -17,3 +17,13 @@ Redux
  - PUT request using the given presigned endpoint, where image is included.
  - Once the image is uploaded successfully.
  - After that, made the PATCH request where the modified fields and also update the new imageUrl to the database.
+
+### WebSocket
+
+- **Library Used**: Implemented the `socket.io` library.
+- **Socket Connection**: 
+  - When the chat component is loaded, a WebSocket connection is established.
+  - The `joinChat` event is emitted to create a **room** for the chat participants.
+- **Message Sending**:
+  - When a message is sent, the `sendMessage` event is emitted.
+  - The **room** ensures that the message is broadcasted to all participants connected to the room.
