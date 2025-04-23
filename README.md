@@ -1,29 +1,35 @@
- - routing will happen in root level
+# 💬 Chat Web Application (Frontend)
 
- Body - component
-   - NavBar 
-   - Route=/ => chatPeople
-   - Route=/login => Login
-   - Route=/signup => /SignUp
+This is the frontend of the **Chat Web Application**, built using React, Redux, and TailwindCSS. It provides a real-time chat interface powered by WebSocket communication and includes an image upload feature using pre-signed URLs in **S3**.
 
-Redux 
-  - store
-  - provider for access the store any whery in the component (centralized)
-  - slice -> state, reducer, action
+---
 
-**s3**
- - 
- - get the presigned url generated form the backend.
- - PUT request using the given presigned endpoint, where image is included.
- - Once the image is uploaded successfully.
- - After that, made the PATCH request where the modified fields and also update the new imageUrl to the database.
+## 🚀 Features
 
-### WebSocket
+- **🔐 User Authentication**: Login and signup functionality.
+- **💬 Real-Time Messaging**: Send and receive messages instantly using `socket.io-client`.
+- **📁 Profile Picture Upload**: Upload images to AWS S3 using secure `pre-signed URLs`.
+- **📦 Redux State Management**: Global state managed using `@reduxjs/toolkit`.
+- **🔔 Toast Notifications**: Feedback for actions using `react-toastify`.
 
-- **Library Used**: Implemented the `socket.io` library.
-- **Socket Connection**: 
-  - When the chat component is loaded, a WebSocket connection is established.
-  - The `joinChat` event is emitted to create a **room** for the chat participants.
-- **Message Sending**:
-  - When a message is sent, the `sendMessage` event is emitted.
-  - The **room** ensures that the message is broadcasted to all participants connected to the room.
+---
+
+## 🛠 Tech Stack
+
+
+- **React**: Used to build the user interface of the application.
+- **Redux Toolkit**: Manages the global state of the app easily.
+- **React Router**: Handles navigation between different pages.
+- **Socket.IO Client**: Enables real-time chat functionality.
+- **Axios**: Makes API requests to the backend.
+- **TailwindCSS**: Provides modern and responsive styling.
+- **DaisyUI**: Offers pre-designed UI components for faster development.
+- **React Toastify**: Displays notifications for user actions.
+
+---
+
+## 🌐 Deployment
+
+Both the frontend and backend are deployed on AWS EC2 instances.
+
+🔗 [http://16.171.224.207](http://16.171.224.207) 

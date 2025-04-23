@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import createWebSocketConnection from '../utils/webSocket';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 export const Chats = () => {
 
@@ -26,6 +27,28 @@ export const Chats = () => {
 
   }
 
+  const getChatMessage = async() => {
+    try {
+      const chatMessage = await axios.get(import.meta.env.VITE_API_URL +'/getChat/' + toUserId, {withCredentials: true});
+      console.log(chatMessage);
+
+      const formattedMessages = chatMessage?.data?.messages.map((message) => ({
+        firstName: message?.senderId?.firstName,
+        newMessage: message?.text,
+        senderId: message.senderId?._id
+      }));
+
+      setMessage(formattedMessages);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(()=> {
+    getChatMessage()
+  }, []);
+
   useEffect(()=> {
 
     if (!fromUserId ) return;
@@ -37,9 +60,9 @@ export const Chats = () => {
     socket.emit('joinChat',{fromUserId, toUserId} );
 
     //listen for the messageWanted
-    socket.on("receiveMessage", ({firstName, newMessage}) => {
-      console.log("messagereceived");
-      setMessage((prevMessages) => [...prevMessages, {firstName, newMessage}]);
+    socket.on("receiveMessage", ({firstName, newMessage, fromUserId}) => {
+      // console.log("messagereceived");
+      setMessage((prevMessages) => [...prevMessages, {firstName, newMessage, senderId: fromUserId}]);
     })
 
     return () => {
@@ -53,7 +76,7 @@ export const Chats = () => {
     <div className="w-1/2 p-6 rounded-lg shadow-2xl flex flex-col my-10">
       <div className="flex-1 overflow-y-auto scrollbar-hide">
         {message.map((mes, index) => (
-          <div key={index} className="chat chat-start">
+          <div key={index} className={`chat ${mes.senderId === fromUserId ? 'chat-end' : 'chat-start'}`}>
           <div className="chat-header">
             { mes.firstName }
           </div>

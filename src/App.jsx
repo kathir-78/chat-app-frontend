@@ -1,8 +1,8 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom"
+import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom"
 import { Body } from "./components/Body"
 import { Login } from "./components/Login"
 import { SignUp } from "./components/SignUp"
-import { Provider } from "react-redux"
+import { Provider, useSelector } from "react-redux"
 import appStore from "./utils/appStore"
 import { Profile } from "./components/Profile"
 import { User } from "./components/User"
@@ -20,7 +20,10 @@ function App() {
         <Routes>
           <Route path="/" element={ <Body/>}>
             <Route path="/" element={<User/>}/>
-            <Route path="/login" element={<Login />}/>
+            <Route
+                path="/login"
+                element={<ProtectedLoginRoute><Login /></ProtectedLoginRoute>}
+            />
             <Route path="/profile" element={<Profile />}/>
             <Route path="/signup" element={<SignUp />}/>
             <Route path="/chat/:toUser" element={<Chats />}/>
@@ -31,5 +34,15 @@ function App() {
     </>
   )
 }
+
+const ProtectedLoginRoute = ({ children }) => {
+  const user = useSelector((state) => state.user); 
+  if (user) {
+
+    return <Navigate to="/" />;
+  }
+
+  return children;
+};
 
 export default App
