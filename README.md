@@ -30,6 +30,6 @@ This is the frontend of the **Chat Web Application**, built using React, Redux, 
 
 ## 🌐 Deployment
 
-Both the frontend and backend are deployed on AWS EC2 instances.
+Both the frontend and backend are deployed on AWS EC2 instance.
 
 🔗 [http://16.171.224.207](http://16.171.224.207) 
